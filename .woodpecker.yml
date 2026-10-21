@@ -1,0 +1,14 @@
+when:
+  - event: [push, pull_request]
+
+steps:
+  - name: lint
+    image: rust:1
+    commands:
+      - cargo fmt --check
+      - cargo clippy --all-targets -- -D warnings
+
+  - name: test
+    image: rust:1
+    commands:
+      - cargo test --all-features
